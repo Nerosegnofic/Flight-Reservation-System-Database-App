@@ -4,18 +4,18 @@
 
 ## Overview
 
-The **Flight Reservation System** is a database-driven application designed to efficiently manage and streamline the operations of an airline booking process. It provides a robust backend structure to handle critical data, including flight schedules, passenger information, seat availability, ticket bookings, and payment tracking. 
+The **Flight Reservation System** is a robust backend architecture built to manage the complex data workflows of modern airline booking systems. This database-driven application is designed to efficiently handle flight scheduling, passenger profiles, seat allocations, and secure payment tracking.
 
-This project demonstrates core relational database concepts, efficient querying, and data integrity tailored for a real-world reservation scenario.
+This project serves as a practical implementation of relational database design, focusing on data integrity, efficient indexing, and complex querying for a real-world ticketing scenario.
 
 ## Key Features
 
-*   **Flight Management:** Store and retrieve comprehensive flight details (origin, destination, departure/arrival times, aircraft type).
-*   **Passenger Profiles:** Securely manage customer data, preferences, and booking history.
-*   **Booking System:** Process reservations, manage booking statuses (confirmed, pending, canceled), and issue unique booking references.
-*   **Seat Allocation:** Track available, reserved, and booked seats across different classes (Economy, Business, First).
-*   **Payment Tracking:** Record transactions, payment methods, and billing information linked to specific bookings.
-*   **Reporting:** Execute complex queries to generate insights (e.g., flights on a specific date, passenger lists, revenue summaries).
+*   **Fleet & Route Management:** Maintain detailed records of flight origins, destinations, schedules, and aircraft specifications.
+*   **Customer Identity Management:** Securely store passenger demographics, contact information, and historical travel data.
+*   **Reservation Engine:** Track the entire lifecycle of a booking (pending, confirmed, canceled) and generate unique reservation references.
+*   **Dynamic Seat Allocation:** Monitor real-time availability across various cabin classes (Economy, Business, First Class) to prevent double-booking.
+*   **Transaction Logging:** Record payment statuses, billing amounts, and transaction methods linked to individual reservations.
+*   **Operational Analytics:** Utilize advanced SQL queries to generate insights on daily flight manifests, revenue streams, and route popularity.
 
 ## Database Schema (ER Diagram)
 
@@ -25,64 +25,65 @@ This project demonstrates core relational database concepts, efficient querying,
 *   **`Flight`**: flight_id, origin, destination, departure_time, arrival_time...
 *   **`Passenger`**: passenger_id, first_name, last_name, email, passport_number...
 *   **`Booking`**: booking_id, passenger_id, flight_id, booking_date, status...
-*   **`Ticket`**: ticket_id, booking_id, seat_number, class, price...
+*   **`Ticket`**: ticket_id, booking_id, seat_number, cabin_class, price...
 *   **`Payment`**: payment_id, booking_id, amount, payment_date, method...
 
 ## Tech Stack
 
-*(Update these based on what you actually used)*
 *   **Database Engine:** PostgreSQL / MySQL / SQL Server
-*   **Backend Language:** Node.js / Java / Python / C#
-*   **Framework (if applicable):** Express.js / Spring Boot / Django 
-*   **Database Design Tool:** dbdiagram.io / MySQL Workbench / pgAdmin
+*   **Backend Environment:** Node.js / Java / Python 
+*   **Framework Options:** Express.js / Spring Boot / Django 
+*   **Database Design Tools:** dbdiagram.io / MySQL Workbench / pgAdmin
 
 ## Getting Started
 
-Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+Follow these instructions to configure the database schema and application environment on your local machine.
 
 ### Prerequisites
 
-*   [Install PostgreSQL/MySQL](Link to installation)
-*   [Install Node.js/Python/Java](Link to installation)
+*   A local relational database server ([PostgreSQL](https://www.postgresql.org/download/) or [MySQL](https://dev.mysql.com/downloads/))
+*   A backend runtime environment ([Node.js](https://nodejs.org/), [Java](https://www.oracle.com/java/technologies/downloads/), or [Python](https://www.python.org/downloads/))
 
 ### Installation
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/Nerosegnofic/Flight-Reservation-System-Database-App.git](https://github.com/Nerosegnofic/Flight-Reservation-System-Database-App.git)
+    git clone https://github.com/Nerosegnofic/Flight-Reservation-System-Database-App.git
     cd Flight-Reservation-System-Database-App
     ```
 
 2.  **Database Setup:**
-    *   Log in to your local database server.
-    *   Execute the initialization script to create the schema and tables:
+    *   Log into your local SQL server.
+    *   Run the provided initialization script to build the schema:
         ```bash
         # Example for MySQL
         mysql -u your_username -p < sql/schema.sql
         ```
-    *   (Optional) Load the dummy data for testing:
+    *   (Optional) Populate the database with test data:
         ```bash
         mysql -u your_username -p < sql/seed_data.sql
         ```
 
-3.  **Application Setup (If applicable):**
-    *   Install dependencies:
+3.  **Application Setup:**
+    *   Install backend dependencies:
         ```bash
-        npm install  # or pip install -r requirements.txt / mvn clean install
+        npm install  # For Node.js environments
+        # or pip install -r requirements.txt for Python
+        # or mvn clean install for Java
         ```
-    *   Configure your database connection strings in the `.env` or configuration file.
-    *   Run the application:
+    *   Update your `.env` or configuration file with the correct database credentials.
+    *   Launch the application server:
         ```bash
-        npm start # or python app.py 
+        npm start 
+        # or python app.py 
         ```
 
 ## Usage
 
-*(Provide examples of how to use the app or run key SQL queries. For example:)*
-
-**Find all available flights from JFK to LHR on 2026-10-15:**
+**Example Query: Find all available flights from JFK to LHR on October 15, 2026:**
 ```sql
 SELECT flight_number, departure_time, available_seats
 FROM Flights
-WHERE origin = 'JFK' AND destination = 'LHR' 
-AND DATE(departure_time) = '2026-10-15';
+WHERE origin = 'JFK' 
+  AND destination = 'LHR' 
+  AND DATE(departure_time) = '2026-10-15';
